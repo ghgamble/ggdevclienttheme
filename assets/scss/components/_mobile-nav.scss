@@ -1,0 +1,180 @@
+.main-mobile-menu {
+  display: none;
+  background-color: #373b47;
+  padding: 20px;
+  flex-direction: column;
+  margin-top: 10px;
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    li {
+      width: 100%;
+      list-style-type: none;
+
+      .submenu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.5rem 0;
+
+        &:focus {
+          outline: 3px solid #fff;
+          outline-offset: 4px;
+        }
+
+        @media (min-width: 769px) {
+          display: none;
+        }
+      }
+
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        width: 100%;
+        display: block;
+
+        &:focus {
+          outline: 3px solid #fff;
+          outline-offset: 4px;
+        }
+      }
+
+      .sub-menu {
+        padding-left: 20px;
+        display: none;
+
+        a {
+          &:focus {
+            outline: 3px solid #fff;
+            outline-offset: 4px;
+          }
+        }
+      }
+
+      .sub-menu.open {
+        display: block;
+      }
+    }
+  }
+}
+
+#site-navigation {
+  display: none;
+  align-items: center;
+  gap: 10px;
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+
+    &:focus {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+
+    .hamburger-icon {
+      display: block;
+      width: 24px;
+      height: 18px;
+    }
+  }
+}
+
+/* ✅ MOBILE STYLES */
+@media (max-width: 768px) {
+  .site-header.menu-open {
+    padding: 20px 0 0 0;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .c-header__logo {
+    padding-left: 10px;
+    flex: 1 1 auto;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  #site-navigation {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-mobile-menu.open {
+    display: flex;
+  }
+}
+
+/* ✅ DESKTOP STYLES */
+@media (min-width: 769px) {
+  .main-mobile-menu {
+    display: none !important;
+  }
+
+  #site-navigation {
+    display: none;
+  }
+
+  .header-nav .menu li {
+    position: relative;
+
+    .sub-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #373b47;
+      padding: 10px;
+      border-radius: 4px;
+      min-width: 120px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      list-style-type: none;
+      margin-top: 10px;
+
+      li a {
+        white-space: nowrap;
+        display: block;
+        padding: 6px 4px;
+        color: #ffffff;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:focus {
+          outline: 3px solid #fff;
+          outline-offset: 4px;
+        }
+      }
+
+      li:hover > a {
+        color: #cccccc;
+      }
+    }
+
+    &:hover > .sub-menu {
+      display: block;
+    }
+  }
+}

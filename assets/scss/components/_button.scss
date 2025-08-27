@@ -1,0 +1,81 @@
+.is-style-outline-green {
+  .wp-block-button__link {
+    background: transparent;
+    color: #5cb9aa;
+    border: 3px solid #5cb9aa;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 1.125rem;
+    padding: 0.75rem 2rem;
+
+    &:hover {
+      background: #5cb9aa;
+      color: #fff;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #2c944b;
+      outline-offset: 4px;
+    }
+  }
+}
+
+.is-style-white-on-dark {
+  .wp-block-button__link {
+    background: #fff;
+    color: #5cb9aa;
+    border: none;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 1.125rem;
+
+    &:hover {
+      background-color: #e8e8e8;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #2c944b;
+      outline-offset: 4px;
+    }
+  }
+}
+
+.is-style-green-on-image {
+  .wp-block-button__link {
+    background: #5cb9aa;
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 1.125rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+  }
+}
+
+.is-style-green-solid {
+  .wp-block-button__link {
+    background: #5cb9aa;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.125rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+  }
+}

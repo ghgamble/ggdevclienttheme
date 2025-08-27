@@ -1,0 +1,165 @@
+.wpcf7 {
+  background-color: #edeff1;
+  padding: 3rem 0 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f3e68;
+    margin-top: 0;
+  }
+
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+
+    @media (max-width: 438px) {
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 434px) {
+      gap: 0.65rem;
+    }
+
+    @media (max-width: 433px) {
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 429px) {
+      gap: 0.35rem;
+    }
+
+    @media (max-width: 423px) {
+      gap: 0.1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      flex: 1 1 calc(50% - 0.5rem);
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      background: white;
+      font-size: 1rem;
+      box-shadow: inset 0 0 0 1px #ccc;
+      transition: box-shadow 0.2s;
+
+      &:focus {
+        box-shadow: inset 0 0 0 2px #36b7a8;
+        outline: none;
+      }
+
+      @media (max-width: 475px) {
+        width: 90%;
+      }
+
+      @media (max-width: 435px) {
+        width: 85%;
+      }
+
+      @media (max-width: 400px) {
+        width: 80%;
+      }
+
+    }
+
+    // Ensure labels or aria-labels are present in HTML
+    &:has(input:nth-child(3)) {
+      justify-content: flex-start;
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 300;
+    color: #666; // Improved contrast
+  }
+
+  textarea {
+    width: 93%;
+    min-height: 4rem;
+    resize: vertical;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: white;
+    font-size: 1rem;
+    box-shadow: inset 0 0 0 1px #ccc;
+    transition: box-shadow 0.2s;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px #36b7a8;
+      outline: none;
+    }
+
+    @media (max-width: 435px) {
+      width: 85%;
+    }
+
+    @media (max-width: 400px) {
+      width: 80%;
+    }
+
+  }
+
+  input[type="submit"] {
+    background: #36b7a8;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      background: #2da292;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+  }
+
+  .wpcf7-response-output {
+    margin-top: 1rem;
+    color: #03678e;
+  }
+
+  @media (max-width: 768px) {
+    .form-flex input {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  form.wpcf7-form > div:first-of-type {
+    transform: translateX(20px);
+  }
+
+  .wpcf7 input[type="submit"],
+  .wpcf7 textarea,
+  .wpcf7 h3 {
+    margin-left: 20px;
+  }
+}
