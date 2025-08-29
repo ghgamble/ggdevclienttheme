@@ -36,7 +36,7 @@
 	<?php if ( have_posts() ) : ?>
 
 		<div class="o-container">
-			<div class="archive-masonry">
+			<div class="archive-masonry max-3">
 				<?php while ( have_posts() ) : the_post(); ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'masonry-card' ); ?>>
 						<?php if ( has_post_thumbnail() ) : ?>

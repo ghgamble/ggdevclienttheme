@@ -191,64 +191,66 @@ add_action('customize_register', 'ggdevclienttheme_customize_register');
 
 /**
  * Output the Customizer styles in the <head>
+ * Applies Body/Heading fonts globally,
+ * but respects block-level font selections (has-*-font-family).
  */
 function ggdevclienttheme_customizer_styles() {
-	$body_font = get_theme_mod('ggdevclienttheme_font_family', "'Roboto', sans-serif");
-	$heading_font = get_theme_mod('ggdevclienttheme_heading_font_family', "'Arial', sans-serif");
-	$body_weight = get_theme_mod('ggdevclienttheme_font_weight', 400);
-	$heading_weight = get_theme_mod('ggdevclienttheme_heading_font_weight', 700);
-	$font_scale = get_theme_mod('ggdevclienttheme_font_scale', 1);
+	$body_font     = get_theme_mod('ggdevclienttheme_font_family', "'Roboto', sans-serif");
+	$heading_font  = get_theme_mod('ggdevclienttheme_heading_font_family', "'Arial', sans-serif");
+	$body_weight   = get_theme_mod('ggdevclienttheme_font_weight', 400);
+	$heading_weight= get_theme_mod('ggdevclienttheme_heading_font_weight', 700);
+	$font_scale    = get_theme_mod('ggdevclienttheme_font_scale', 1);
 ?>
 <style type="text/css">
 	:root {
 		font-size: calc(1rem * <?php echo $font_scale; ?>);
+		--gg-body-font: <?php echo $body_font; ?>;
+		--gg-heading-font: <?php echo $heading_font; ?>;
 	}
 
 	body {
 		background-color: <?php echo get_theme_mod('ggdevclienttheme_body_bg_color', '#ffffff'); ?>;
-		font-family: <?php echo $body_font; ?> !important;
-		font-weight: <?php echo $body_weight; ?>;
+		font-family: var(--gg-body-font) !important;
+		font-weight: <?php echo (int) $body_weight; ?>;
 	}
 
-	/* Headings */
+	/* Headings default (don’t override blocks that set a font) */
 	h1, h2, h3, h4, h5, h6 {
-		font-family: <?php echo $heading_font; ?> !important;
-		font-weight: <?php echo $heading_weight; ?>;
+		font-family: var(--gg-heading-font) !important;
+		font-weight: <?php echo (int) $heading_weight; ?>;
 	}
 
-	.wp-block-heading {
-		font-family: <?php echo $heading_font; ?> !important;
+	/* Only set heading font on core heading blocks that have NOT chosen a font */
+	.wp-block-heading:not([class*="has-"][class*="-font-family"]) {
+		font-family: var(--gg-heading-font) !important;
 	}
 
-	.site p,
-	.site li,
-	.site a,
-	.site span,
-	.site div,
-	.site input,
-	.site textarea,
-	.site select,
-	.site button,
-	.site .wpcf7-form-control,
-	.site .wp-block,
-	.site .wp-block-paragraph,
-	.site .wp-block-button__link.wp-element-button {
-		font-family: <?php echo $body_font; ?> !important;
+	/* Apply Customizer body font in content, UNLESS a block explicitly set a font */
+	:where(.wp-site-blocks, .entry-content, main#primary.site-main)
+		:where(p, li, a, span, .img-label, .wp-block-button__link.wp-element-button)
+		:not([class*="has-"][class*="-font-family"]) {
+		font-family: var(--gg-body-font) !important;
 	}
 
+	/* Links in main content area */
 	main#primary.site-main a {
 		color: <?php echo get_theme_mod('ggdevclienttheme_body_link_color', '#20ddae'); ?>;
 	}
 
-	main#primary.site-main a:hover, main#primary.site-main a:focus, main#primary.site-main a:active, main#primary.site-main a:visited {
+	main#primary.site-main a:hover,
+	main#primary.site-main a:focus,
+	main#primary.site-main a:active,
+	main#primary.site-main a:visited {
 		color: <?php echo get_theme_mod('ggdevclienttheme_body_link_hover_color', '#1bbd97'); ?>;
 	}
 
+	/* Menus keep body font */
 	ul#menu-main-menu li a,
 	div#mobile-primary-menu li a {
-		font-family: <?php echo $body_font; ?> !important;
+		font-family: var(--gg-body-font) !important;
 	}
 
+	/* Footer inherits body font */
 	.site-footer,
 	.site-footer p,
 	.site-footer li,
@@ -259,18 +261,23 @@ function ggdevclienttheme_customizer_styles() {
 	.site-footer h4,
 	.site-footer h5,
 	.site-footer h6 {
-		font-family: <?php echo $body_font; ?> !important;
+		font-family: var(--gg-body-font) !important;
 	}
 
+	/* Header + mobile menu colors */
 	header.site-header, div#mobile-primary-menu {
 		background-color: <?php echo get_theme_mod('ggdevclienttheme_header_bg', '#282b35'); ?>;
 	}
 
-	header.site-header .header-nav .menu li a, header.site-header ul#menu-main-menu li a, header.site-header div#mobile-primary-menu li a {
+	header.site-header .header-nav .menu li a,
+	header.site-header ul#menu-main-menu li a,
+	header.site-header div#mobile-primary-menu li a {
 		color: <?php echo get_theme_mod('ggdevclienttheme_header_font_color', '#20ddae'); ?>;
 	}
 
-	header.site-header .header-nav .menu li a:hover, header.site-header ul#menu-main-menu li a:hover, header.site-header div#mobile-primary-menu li a:hover {
+	header.site-header .header-nav .menu li a:hover,
+	header.site-header ul#menu-main-menu li a:hover,
+	header.site-header div#mobile-primary-menu li a:hover {
 		color: <?php echo get_theme_mod('ggdevclienttheme_header_font_color', '#1bbd97'); ?>;
 	}
 
@@ -294,53 +301,47 @@ function ggdevclienttheme_customizer_styles() {
 		fill: <?php echo get_theme_mod('ggdevclienttheme_hamburger_icon_color', '#20ddae'); ?>;
 	}
 
+	/* Career accents */
 	div#career-block .apploi-drop-down select#job-title-filter {
 		background-color: <?php echo get_theme_mod('ggdevclienttheme_career_accent_color', '#03678e'); ?> !important;
 		border: 1px solid <?php echo get_theme_mod('ggdevclienttheme_career_accent_color', '#03678e'); ?> !important;
 	}
-
 	a.job-link {
 		color: <?php echo get_theme_mod('ggdevclienttheme_career_accent_color', '#03678e'); ?> !important;
 	}
 
+	/* CF7 */
 	.wpcf7 h3 {
 		color: <?php echo get_theme_mod('ggdevclienttheme_contact_header_color', '#282b35'); ?>;
 	}
-
 	.wpcf7 input[type=submit] {
 		background: <?php echo get_theme_mod('ggdevclienttheme_contact_button_color', '#20ddae'); ?>;
 	}
-
 	.wpcf7 input[type=submit]:hover {
 		background: <?php echo get_theme_mod('ggdevclienttheme_contact_button_hover_color', '#1ab89a'); ?>;
 	}
 
+	/* Skip link */
 	.skip-to-content {
 		background: <?php echo get_theme_mod('ggdevclienttheme_skip_top_bg_color', '#20ddae'); ?>;
 		color: <?php echo get_theme_mod('ggdevclienttheme_skip_top_font_color', '#ffffff'); ?>;
 	}
-
 	.skip-to-content:hover {
 		background: <?php echo get_theme_mod('ggdevclienttheme_skip_top_bg_color', '#1ab89a'); ?>;
 		color: <?php echo get_theme_mod('ggdevclienttheme_skip_top_font_hover_color', '#282b35'); ?>;
 	}
 
+	/* Footer social */
 	.footer-social .footer-icons a {
 		color: <?php echo get_theme_mod('ggdevclienttheme_footer_link_color', '#20ddae'); ?>;
 	}
-
 	.footer-social .footer-icons a:hover {
 		color: <?php echo get_theme_mod('ggdevclienttheme_footer_link_color', '#1ab89a'); ?>;
 	}
 
 	<?php if (get_theme_mod('ggdevclienttheme_reduce_motion')) : ?>
-	html {
-		scroll-behavior: auto !important;
-	}
-	*, *::before, *::after {
-		animation: none !important;
-		transition: none !important;
-	}
+	html { scroll-behavior: auto !important; }
+	*, *::before, *::after { animation: none !important; transition: none !important; }
 	<?php endif; ?>
 
 	<?php if (get_theme_mod('ggdevclienttheme_dark_mode')) : ?>
@@ -352,4 +353,4 @@ function ggdevclienttheme_customizer_styles() {
 </style>
 <?php
 }
-add_action('wp_head', 'ggdevclienttheme_customizer_styles');
+add_action('wp_head', 'ggdevclienttheme_customizer_styles', 99);
