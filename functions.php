@@ -139,6 +139,7 @@ add_filter('block_categories_all', 'ggdevclienttheme_register_block_category', 1
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/custom-walker.php';
 require get_template_directory() . '/inc/child-theme-generator.php';
+require get_template_directory() . '/inc/role-owner.php';
 
 /**
  * Footer widgets (kept)
